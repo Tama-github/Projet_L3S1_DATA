@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Created by msi on 23/11/2016.
+ * @autor Ludovic BURG
  */
 public class Parseur {
 
@@ -67,15 +67,13 @@ public class Parseur {
     }
 
 
-    /*
+    /**
      *
      *  Recherche tous les batiment dans un fichier de config
      *
-     *  @param
-     *      String nomfichier : Le fichier de config qui contiens les info sur l'emplacement des capteurs
+     *  @param nomFichier String : Le fichier de config qui contiens les info sur l'emplacement des capteurs
      *
-     *  @return
-     *      ArrayList<String> : Le tableai qui contiens tous les batiments concerné
+     *  @return ArrayList<String> : Le tableai qui contiens tous les batiments concerné
      */
     public static ArrayList<String> getBatiments (String nomFichier) {
         ArrayList<String> res = new ArrayList<>();
@@ -105,15 +103,13 @@ public class Parseur {
         return res;
     }
 
-    /*
+    /**
      *  Recherche tous les étages diponible pour un batiment dans un fichier de config
      *
-     *  @param
-     *      String nomfichier : Le fichier de config qui contiens les info sur l'emplacement des capteurs
-     *      String batiment   : Le label du batiement
+     *  @param nomFichier String : Le fichier de config qui contiens les info sur l'emplacement des capteurs
+     *  @param batiment String   : Le label du batiement
      *
-     *  @return
-     *      ArrayList<String> : Le tableau qui contiens tous les etages concerné
+     *  @return ArrayList<String> : Le tableau qui contiens tous les etages concerné
      */
     public static ArrayList<String> getEtagesForBatoment (String nomFichier, String batiment) {
         ArrayList<String> res = new ArrayList<>();
@@ -146,16 +142,15 @@ public class Parseur {
     }
 
 
-    /*
+    /**
      *  Recherche toutes les salles diponible pour un étage d'un batiment dans un fichier de config
      *
-     *  @param
-     *      String nomfichier : Le fichier de config qui contiens les info sur l'emplacement des capteurs
-     *      String batiment   : Le label du batiement
-     *      String etage      : Le label de l'étage
      *
-     *  @return
-     *      ArrayList<String> : Le tableau qui contiens toutes les salles concerné
+     *  @param nomFichier String : Le fichier de config qui contiens les info sur l'emplacement des capteurs
+     *  @param batiment String   : Le label du batiement
+     *  @param etage String      : Le label de l'étage
+     *
+     *  @return ArrayList<String> : Le tableau qui contiens toutes les salles concerné
      */
     public static ArrayList<String> getSallesForEtageAndBatoment (String nomFichier, String batiment, String etage) {
         ArrayList<String> res = new ArrayList<>();
