@@ -66,7 +66,18 @@ public class Parseur {
         } while (c != ';' && !trouve);
     }
 
-    public static ArrayList<String> getBatiment (String nomFichier) {
+
+    /*
+     *
+     *  Recherche tous les batiment dans un fichier de config
+     *
+     *  @param
+     *      String nomfichier : Le fichier de config qui contiens les info sur l'emplacement des capteurs
+     *
+     *  @return
+     *      ArrayList<String> : Le tableai qui contiens tous les batiments concerné
+     */
+    public static ArrayList<String> getBatiments (String nomFichier) {
         ArrayList<String> res = new ArrayList<>();
         char c;
         String s = "";
@@ -94,6 +105,16 @@ public class Parseur {
         return res;
     }
 
+    /*
+     *  Recherche tous les étages diponible pour un batiment dans un fichier de config
+     *
+     *  @param
+     *      String nomfichier : Le fichier de config qui contiens les info sur l'emplacement des capteurs
+     *      String batiment   : Le label du batiement
+     *
+     *  @return
+     *      ArrayList<String> : Le tableau qui contiens tous les etages concerné
+     */
     public static ArrayList<String> getEtagesForBatoment (String nomFichier, String batiment) {
         ArrayList<String> res = new ArrayList<>();
         char c;
@@ -124,6 +145,18 @@ public class Parseur {
         return res;
     }
 
+
+    /*
+     *  Recherche toutes les salles diponible pour un étage d'un batiment dans un fichier de config
+     *
+     *  @param
+     *      String nomfichier : Le fichier de config qui contiens les info sur l'emplacement des capteurs
+     *      String batiment   : Le label du batiement
+     *      String etage      : Le label de l'étage
+     *
+     *  @return
+     *      ArrayList<String> : Le tableau qui contiens toutes les salles concerné
+     */
     public static ArrayList<String> getSallesForEtageAndBatoment (String nomFichier, String batiment, String etage) {
         ArrayList<String> res = new ArrayList<>();
         char c;
@@ -154,8 +187,9 @@ public class Parseur {
         return res;
     }
 
+    //main de test
     static public void main (String [] args) {
-        ArrayList<String> a = Parseur.getBatiment("position_capteur.txt");
+        ArrayList<String> a = Parseur.getBatiments("position_capteur.txt");
         System.out.println(a);
         a = Parseur.getEtagesForBatoment("position_capteur.txt", "U3");
         System.out.println(a);
