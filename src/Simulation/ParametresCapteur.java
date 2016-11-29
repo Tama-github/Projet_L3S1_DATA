@@ -193,4 +193,5 @@ public class ParametresCapteur extends JFrame {
     public JButton getValider() {
         return valider;
     }
+
 }

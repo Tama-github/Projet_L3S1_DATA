@@ -28,4 +28,9 @@ public class LocalisationInterieur extends Localisation {
     public void setInfoSup(String infoSup) {
         this.infoSup = infoSup;
     }
+
+    @Override
+    public String getStringForConnexion() {
+        return this.batiment+";"+this.etage+";"+this.salle+";"+this.infoSup;
+    }
 }

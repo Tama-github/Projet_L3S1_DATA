@@ -12,4 +12,9 @@ public class LocalisationExterieur extends Localisation {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+
+    @Override
+    public String getStringForConnexion() {
+        return this.latitude+";"+this.longitude;
+    }
 }

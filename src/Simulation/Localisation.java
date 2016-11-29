@@ -16,4 +16,6 @@ public abstract class Localisation {
     public String getType() {
         return type;
     }
+
+    public abstract String getStringForConnexion();
 }
