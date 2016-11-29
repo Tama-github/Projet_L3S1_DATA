@@ -20,9 +20,21 @@ public class FenetreGestionEnvoie extends JFrame {
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(300, 300);
-        GridLayout grid = new GridLayout(7,1);
-        JPanel container = new JPanel();
-        container.setLayout(grid);
+        GridLayout grid = new GridLayout(4,1);
+        JPanel mainContainer = new JPanel();
+        mainContainer.setLayout(grid);
+
+        GridLayout grid2 = new GridLayout(1, 2);
+        JPanel subContainerButton = new JPanel();
+        subContainerButton.setLayout(grid2);
+
+        GridLayout grid3 = new GridLayout(1, 2);
+        JPanel subContainerFixe = new JPanel();
+        subContainerFixe.setLayout(grid3);
+
+        GridLayout grid4 = new GridLayout(1, 2);
+        JPanel subContainerFreq = new JPanel();
+        subContainerFreq.setLayout(grid4);
 
         /* Boutons radios */
         this.typeGeneration = new ButtonGroup();
@@ -30,28 +42,39 @@ public class FenetreGestionEnvoie extends JFrame {
         JRadioButton fixe = new JRadioButton("Generation d'une valeur fixe");
         this.typeGeneration.add(alea);
         this.typeGeneration.add(fixe);
-        container.add(alea);
-        container.add(fixe);
+        mainContainer.add(alea);
+        subContainerFixe.add(fixe);
 
         /* entre de la valeur du capteur */
         this.valeur = new JSpinner();
-        this.valeur.enableInputMethods(false);
-        container.add(this.valeur);
+        this.enableEditValeur(false);
+        subContainerFixe.add(this.valeur);
+
+        mainContainer.add(subContainerFixe);
 
         /* Frequence d'envoie */
         JLabel freq = new JLabel("Frequance d'envoie");
         this.frequanceEnvoie = new JSpinner();
-        container.add(freq);
-        container.add(this.frequanceEnvoie);
+        subContainerFreq.add(freq);
+        subContainerFreq.add(this.frequanceEnvoie);
+
+        mainContainer.add(subContainerFreq);
+
 
         /* Boutons de controlle */
         this.envoie = new JButton("Envoie des donnees");
         this.deconnexion = new JButton("Deconnexion du capteur");
-        container.add(this.envoie);
-        container.add(this.deconnexion);
+        subContainerButton.add(this.envoie);
+        subContainerButton.add(this.deconnexion);
 
-        this.add(container);
+        mainContainer.add(subContainerButton);
+
+        this.add(mainContainer);
         this.pack();
+    }
+
+    void enableEditValeur (boolean b) {
+        ((JSpinner.DefaultEditor)this.valeur.getEditor()).getTextField().setEnabled(b);
     }
 
     public static void main (String args[]) {
