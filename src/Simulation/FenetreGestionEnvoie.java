@@ -98,11 +98,6 @@ public class FenetreGestionEnvoie extends JFrame {
         ((JSpinner.DefaultEditor)this.valeur.getEditor()).getTextField().setEnabled(b);
     }
 
-    public static void main (String args[]) {
-        FenetreGestionEnvoie fge = new FenetreGestionEnvoie();
-        fge.setVisible(true);
-    }
-
     public boolean isAlea() {
         return isAlea;
     }
@@ -121,5 +116,11 @@ public class FenetreGestionEnvoie extends JFrame {
 
     public JButton getDeconnexion() {
         return deconnexion;
+    }
+
+
+    public static void main (String args[]) {
+        FenetreGestionEnvoie fge = new FenetreGestionEnvoie();
+        fge.setVisible(true);
     }
 }

@@ -5,7 +5,7 @@ import javax.swing.*;
 /**
  * Created by msi on 23/11/2016.
  */
-public class SimulationInterface extends JFrame {
+public class SimulationInterface {
 
     /*
      *  Infos du capteur
@@ -15,9 +15,16 @@ public class SimulationInterface extends JFrame {
     private Localisation localisation;
     private int valeurMin;
     private int valeurMax;
+    /* fenetre creation capteur */
+    /* fenetre gestion connexion */
+    private FenetreGestionEnvoie fenetreGestionEnvoie;
 
 
     public SimulationInterface () {
-        super("Interface de simulation");
+
+        /* creation de la fenetre de gestion d'envoie */
+        this.fenetreGestionEnvoie = new FenetreGestionEnvoie();
+        this.fenetreGestionEnvoie.setVisible(false);
+
     }
 }
