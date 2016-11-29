@@ -4,12 +4,15 @@ import org.w3c.dom.html.HTMLOptGroupElement;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * Created by msi on 28/11/2016.
  */
 public class FenetreGestionEnvoie extends JFrame {
-    private ButtonGroup typeGeneration;
+    private boolean isAlea = true;
     private JSpinner valeur;
     private JSpinner frequanceEnvoie;
     private JButton envoie;
@@ -37,13 +40,31 @@ public class FenetreGestionEnvoie extends JFrame {
         subContainerFreq.setLayout(grid4);
 
         /* Boutons radios */
-        this.typeGeneration = new ButtonGroup();
+        ButtonGroup typeGeneration = new ButtonGroup();
         JRadioButton alea = new JRadioButton("Generation aleatoire");
         JRadioButton fixe = new JRadioButton("Generation d'une valeur fixe");
-        this.typeGeneration.add(alea);
-        this.typeGeneration.add(fixe);
+        typeGeneration.add(alea);
+        typeGeneration.add(fixe);
         mainContainer.add(alea);
         subContainerFixe.add(fixe);
+
+        alea.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                isAlea = true;
+                enableEditValeur(false);
+            }
+        });
+
+        fixe.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                isAlea = false;
+                enableEditValeur(true);
+            }
+        });
 
         /* entre de la valeur du capteur */
         this.valeur = new JSpinner();
@@ -82,4 +103,23 @@ public class FenetreGestionEnvoie extends JFrame {
         fge.setVisible(true);
     }
 
+    public boolean isAlea() {
+        return isAlea;
+    }
+
+    public JSpinner getValeur() {
+        return valeur;
+    }
+
+    public JSpinner getFrequanceEnvoie() {
+        return frequanceEnvoie;
+    }
+
+    public JButton getEnvoie() {
+        return envoie;
+    }
+
+    public JButton getDeconnexion() {
+        return deconnexion;
+    }
 }
