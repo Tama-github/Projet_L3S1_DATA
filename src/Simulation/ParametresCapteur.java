@@ -8,30 +8,9 @@ import java.awt.*;
  */
 public class ParametresCapteur extends JFrame {
 
-    private JPanel princParam = new JPanel();
 
-    private JPanel pIdCapteur = new JPanel();
-    private JLabel lidCapteur = new JLabel("Identifiant du capteur");
     private JFormattedTextField idCapteur = new JFormattedTextField();
-
-    private JPanel pTypeDonnees = new JPanel();
-    private JLabel lTypedonnees = new JLabel("Type de donnée");
     private JFormattedTextField typeDonnees = new JFormattedTextField();
-
-    private JPanel pLocalisation = new JPanel();
-    private JPanel spLoc = new JPanel();
-    private JPanel spBatiment = new JPanel();
-    private JPanel spEtage = new JPanel();
-    private JPanel spSalle = new JPanel();
-    private JPanel spPositionRelative = new JPanel();
-    private JPanel spLongLat = new JPanel();
-    private JLabel lLocalisation = new JLabel("Localisation");
-    private JLabel lBatiment = new JLabel("Bâtiment ");
-    private JLabel lEtage = new JLabel("Étage ");
-    private JLabel lSalle = new JLabel("Salle ");
-    private JLabel lLongitude = new JLabel("Longitude ");
-    private JLabel lLatitude = new JLabel("Latitude ");
-    private JLabel lPosRelative = new JLabel("Position relative");
     private JRadioButton interieur = new JRadioButton("Intérieur ");
     private JRadioButton exterieur =  new JRadioButton("Extérieur ");
     private JTextField latitude = new JTextField();
@@ -41,20 +20,43 @@ public class ParametresCapteur extends JFrame {
     private JComboBox salle = new JComboBox();
     private JFormattedTextField posRelative = new JFormattedTextField();
     private ButtonGroup intExt = new ButtonGroup();
-
-    private JPanel pInterval = new JPanel();
-    private JLabel lInter1 = new JLabel("Intervalle de ");
-    private JLabel lInter2 = new JLabel(" à ");
     private JFormattedTextField min = new JFormattedTextField();
     private JFormattedTextField max = new JFormattedTextField();
-
-    private JPanel pValider = new JPanel();
     private JButton valider = new JButton("Valider");
 
 
     public ParametresCapteur()
     {
         super("Parametres Capteurs");
+
+        JPanel pLocalisation = new JPanel();
+        JPanel spLoc = new JPanel();
+        JPanel spBatiment = new JPanel();
+        JPanel spEtage = new JPanel();
+        JPanel spSalle = new JPanel();
+        JPanel spPositionRelative = new JPanel();
+        JPanel spLongLat = new JPanel();
+        JLabel lLocalisation = new JLabel("Localisation");
+        JLabel lBatiment = new JLabel("Bâtiment ");
+        JLabel lEtage = new JLabel("Étage ");
+        JLabel lSalle = new JLabel("Salle ");
+        JLabel lLongitude = new JLabel("Longitude ");
+        JLabel lLatitude = new JLabel("Latitude ");
+        JLabel lPosRelative = new JLabel("Position relative");
+        JPanel princParam = new JPanel();
+        JPanel pIdCapteur = new JPanel();
+        JLabel lidCapteur = new JLabel("Identifiant du capteur");
+        JPanel pTypeDonnees = new JPanel();
+        JLabel lTypedonnees = new JLabel("Type de donnée");
+        JPanel pInterval = new JPanel();
+        JLabel lInter1 = new JLabel("Intervalle de ");
+        JLabel lInter2 = new JLabel(" à ");
+        JPanel pValider = new JPanel();
+
+
+
+
+
 
         this.setTitle("Parametres Capteurs");
         this.setSize(400,350);
@@ -136,5 +138,59 @@ public class ParametresCapteur extends JFrame {
         ParametresCapteur test = new ParametresCapteur();
     }
 
+    public JFormattedTextField getIdCapteur() {
+        return idCapteur;
+    }
 
+    public JFormattedTextField getTypeDonnees() {
+        return typeDonnees;
+    }
+
+    public JRadioButton getInterieur() {
+        return interieur;
+    }
+
+    public JRadioButton getExterieur() {
+        return exterieur;
+    }
+
+    public JTextField getLatitude() {
+        return latitude;
+    }
+
+    public JTextField getLongitude() {
+        return longitude;
+    }
+
+    public JComboBox getBatiment() {
+        return batiment;
+    }
+
+    public JComboBox getEtage() {
+        return etage;
+    }
+
+    public JComboBox getSalle() {
+        return salle;
+    }
+
+    public JFormattedTextField getPosRelative() {
+        return posRelative;
+    }
+
+    public ButtonGroup getIntExt() {
+        return intExt;
+    }
+
+    public JFormattedTextField getMin() {
+        return min;
+    }
+
+    public JFormattedTextField getMax() {
+        return max;
+    }
+
+    public JButton getValider() {
+        return valider;
+    }
 }
