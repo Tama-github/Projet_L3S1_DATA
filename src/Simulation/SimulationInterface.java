@@ -23,7 +23,7 @@ public class SimulationInterface {
     private int valeurEnvoie;
 
     private ParametresCapteur parametresCapteur;
-    /* fenetre gestion connexion */
+    private FenetreConnexionIP fenetreConnexionIP;
     private FenetreGestionEnvoie fenetreGestionEnvoie;
 
 
@@ -34,6 +34,9 @@ public class SimulationInterface {
         /* fenetre de creation du capteur */
         this.parametresCapteur = new ParametresCapteur();
 
+        /* creation de la fenetre de connexion IP */
+        this.fenetreConnexionIP = new FenetreConnexionIP();
+        this.fenetreConnexionIP.setVisible(false);
 
         /* creation de la fenetre de gestion d'envoie */
         this.fenetreGestionEnvoie = new FenetreGestionEnvoie();
