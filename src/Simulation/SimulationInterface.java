@@ -55,6 +55,7 @@ public class SimulationInterface {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+
                 envoieThread = new EnvoieThread(servicesReseau,
                         (int) fenetreGestionEnvoie.getFrequanceEnvoie().getValue(),
                         fenetreGestionEnvoie.isAlea(),
