@@ -6,7 +6,7 @@ import java.io.IOException;
 /**
  * Created by msi on 30/11/2016.
  */
-public class EnvoieThread implements Runnable {
+public class EnvoieThread extends Thread implements Runnable {
     private ServicesReseau servicesReseau;
     private int temps;
     private boolean alea;
@@ -31,6 +31,7 @@ public class EnvoieThread implements Runnable {
                 servicesReseau.envoyer(this.getStringPourEnvoie());
                 Thread.sleep(this.temps);
             }
+            Thread.currentThread().interrupt();
         } catch (IOException e) {
             Thread.currentThread().interrupt();
         } catch (InterruptedException e) {

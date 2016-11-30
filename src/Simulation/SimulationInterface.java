@@ -29,7 +29,7 @@ public class SimulationInterface {
     private ParametresCapteur parametresCapteur;
     private FenetreConnexionIP fenetreConnexionIP;
     private FenetreGestionEnvoie fenetreGestionEnvoie;
-    private EnvoieThread envoieThread;
+    private EnvoieThread envoieThread = null;
 
     public SimulationInterface () {
         /* Gestionnaire des services reseau */
@@ -67,11 +67,12 @@ public class SimulationInterface {
                         }
                     } else {
                         try {
-                            LocalisationInterieur locInt = new LocalisationInterieur("interieur");
-                            locInt.setBatiment(parametresCapteur.getBatiment().getSelectedItem().toString());
-                            locInt.setEtage(parametresCapteur.getEtage().getSelectedItem().toString());
-                            locInt.setSalle(parametresCapteur.getSalle().getSelectedItem().toString());
-                            locInt.setInfoSup(parametresCapteur.getPosRelative().getText());
+                            System.out.println("interieur");
+                            LocalisationInterieur locInt = new LocalisationInterieur("interieur",
+                                    parametresCapteur.getBatiment().getSelectedItem().toString(),
+                                    parametresCapteur.getEtage().getSelectedItem().toString(),
+                                    parametresCapteur.getSalle().getSelectedItem().toString(),
+                                    parametresCapteur.getPosRelative().getText());
                         } catch (Exception jLang2) {
                             jLang2.printStackTrace();
                         }
@@ -131,24 +132,30 @@ public class SimulationInterface {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                if (envoieThread != null)
+                    envoieThread.interrupt();
+                if (((int) fenetreGestionEnvoie.getFrequanceEnvoie().getValue() > 0))
+                {
+                    envoieThread = new EnvoieThread(servicesReseau,
+                            (int) fenetreGestionEnvoie.getFrequanceEnvoie().getValue(),
+                            fenetreGestionEnvoie.isAlea(),
+                            (int) fenetreGestionEnvoie.getValeur().getValue(),
+                            valeurMin,
+                            valeurMax);
 
-                envoieThread = new EnvoieThread(servicesReseau,
-                        (int) fenetreGestionEnvoie.getFrequanceEnvoie().getValue(),
-                        fenetreGestionEnvoie.isAlea(),
-                        (int) fenetreGestionEnvoie.getValeur().getValue(),
-                        valeurMin,
-                        valeurMax);
-                fenetreGestionEnvoie.getEnvoie().setText("rafraichir");
+                    envoieThread.start();
+                    fenetreGestionEnvoie.getEnvoie().setText("rafraichir");
+                }
             }
         });
-
-
-
     }
 
     public String connexionCapteur () throws IOException {
         if (!this.servicesReseau.estConnecte()) {
             this.servicesReseau.connexion(this.ip, this.port);
+            System.out.println(this.id);
+            System.out.println(this.type);
+            System.out.println(this.localisation.getStringForConnexion());
             this.servicesReseau.envoyer("ConnexionCapteur;" + this.id + ";" + this.type + ";" + this.localisation.getStringForConnexion() + "\n");
         } else {
             throw new IOException();
