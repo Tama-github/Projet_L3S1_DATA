@@ -80,7 +80,7 @@ public class ParametresCapteur extends JFrame {
 
         this.setTitle("Parametres Capteurs");
         this.setSize(400, 350);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         princParam.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -291,6 +291,7 @@ public class ParametresCapteur extends JFrame {
     {
         this.erreur.setForeground(Color.red);
         this.erreur.setText(msg);
+        this.setSize(400,400);
     }
 
     private boolean checkComboBox()

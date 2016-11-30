@@ -75,6 +75,7 @@ public class SimulationInterface {
                 if (parametresCapteur.checkFormulaireParamCapteur())
                 {
                     parametresCapteur.getErreur().setVisible(false);
+                    parametresCapteur.setSize(400, 350);
                     id = parametresCapteur.getIdCapteur().getText();
                     type = parametresCapteur.getType().toString();
                     valeurMin = Integer.parseInt(parametresCapteur.getMin().getText());
