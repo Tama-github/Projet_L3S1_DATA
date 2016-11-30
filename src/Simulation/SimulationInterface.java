@@ -1,9 +1,11 @@
 package Simulation;
 
 import javax.swing.*;
+import javax.swing.tree.ExpandVetoException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.security.acl.LastOwnerException;
 
 /**
  * Created by msi on 23/11/2016.
@@ -66,6 +68,44 @@ public class SimulationInterface {
             }
         });
 
+        this.parametresCapteur.getValider().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent clickValider) {
+                super.mouseClicked(clickValider);
+                if (parametresCapteur.checkFormulaireParamCapteur())
+                {
+                    parametresCapteur.getErreur().setVisible(false);
+                    id = parametresCapteur.getIdCapteur().getText();
+                    type = parametresCapteur.getType().toString();
+                    valeurMin = Integer.parseInt(parametresCapteur.getMin().getText());
+                    valeurMax = Integer.parseInt(parametresCapteur.getMax().getText());
+
+                    if (parametresCapteur.isExterieur())
+                    {
+                        try {
+                            localisation = new LocalisationExterieur("exterieur",Double.parseDouble(parametresCapteur.getLatitude().getText()), Double.parseDouble(parametresCapteur.getLongitude().getText()));
+                        }catch(Exception jLang1)
+                        {
+                            jLang1.printStackTrace();
+                        }
+                    }
+                    else
+                    {
+                        try{
+                            LocalisationInterieur locInt = new LocalisationInterieur("interieur");
+                            locInt.setBatiment(parametresCapteur.getBatiment().getSelectedItem().toString());
+                            locInt.setEtage(parametresCapteur.getEtage().getSelectedItem().toString());
+                            locInt.setSalle(parametresCapteur.getSalle().getSelectedItem().toString());
+                            locInt.setInfoSup(parametresCapteur.getPosRelative().getText());
+                        }catch(Exception jLang2)
+                        {
+                            jLang2.printStackTrace();
+                        }
+
+                    }
+                }
+            }
+        });
 
     }
 

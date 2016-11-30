@@ -28,9 +28,8 @@ public class ParametresCapteur extends JFrame {
     private boolean isInterieur = false;
     private JLabel erreur = new JLabel();
 
-    public ParametresCapteur()
-    {
-        super("Parametres Capteurs");
+    public ParametresCapteur() {
+        super("Paramètres Capteurs");
 
         JPanel pLocalisation = new JPanel();
         JPanel spLoc = new JPanel();
@@ -58,18 +57,17 @@ public class ParametresCapteur extends JFrame {
         JPanel pValider = new JPanel();
 
         JRadioButton interieur = new JRadioButton("Intérieur ");
-        JRadioButton exterieur =  new JRadioButton("Extérieur ");
+        JRadioButton exterieur = new JRadioButton("Extérieur ");
 
-        batiment.addItem("Selection");
-        etage.addItem("Selection");
-        salle.addItem("Selection");
+        batiment.addItem("Sélection");
+        etage.addItem("Sélection");
+        salle.addItem("Sélection");
 
         ArrayList<String> listeBat;
         listeBat = Parseur.getBatiments("position_capteur.txt");
         ListIterator<String> iterateur = listeBat.listIterator();
         batiment.removeAllItems();
-        while (iterateur.hasNext())
-        {
+        while (iterateur.hasNext()) {
             batiment.addItem(iterateur.next());
         }
 
@@ -81,7 +79,7 @@ public class ParametresCapteur extends JFrame {
         posRelative.setEditable(false);
 
         this.setTitle("Parametres Capteurs");
-        this.setSize(400,350);
+        this.setSize(400, 350);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setResizable(false);
         princParam.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -98,7 +96,7 @@ public class ParametresCapteur extends JFrame {
         posRelative.setColumns(20);
         latitude.setColumns(3);
         longitude.setColumns(3);
-        batiment.setSize(10,10);
+        batiment.setSize(10, 10);
         intExt.add(interieur);
         intExt.add(exterieur);
         spBatiment.add(lBatiment);
@@ -189,8 +187,7 @@ public class ParametresCapteur extends JFrame {
                 ArrayList<String> listeEtage;
                 listeEtage = Parseur.getEtagesForBatoment("position_capteur.txt", batiment.getSelectedItem().toString());
                 etage.removeAllItems();
-                for (i = 0; i < listeEtage.size(); i++)
-                {
+                for (i = 0; i < listeEtage.size(); i++) {
                     etage.addItem(listeEtage.get(i));
                 }
             }
@@ -218,8 +215,7 @@ public class ParametresCapteur extends JFrame {
     }
 
 
-    static public void main(String[] args)
-    {
+    static public void main(String[] args) {
         ParametresCapteur test = new ParametresCapteur();
     }
 
@@ -271,6 +267,10 @@ public class ParametresCapteur extends JFrame {
         return valider;
     }
 
+    public JLabel getErreur(){
+        return erreur;
+    }
+
     public boolean isExterieur() {
         return isExterieur;
     }
@@ -293,9 +293,19 @@ public class ParametresCapteur extends JFrame {
         this.erreur.setText(msg);
     }
 
+    private boolean checkComboBox()
+    {
+        if (this.getBatiment().getSelectedItem().toString().equals("Sélection") || this.getEtage().getSelectedItem().toString().equals("Sélection") || this.getSalle().getSelectedItem().toString().equals("Sélection"))
+        {
+            printErr("Erreur : Où se trouve votre capteur ?");
+            return false;
+        }
+        return true;
+    }
+
     private boolean checkChampTexte(JFormattedTextField champText)
     {
-        if (champText.getValue().toString() == "") {
+        if (champText.getText().equals("")) {
             printErr("Erreur : Aucun champs ne doit être vide !");
             return false;
         }
@@ -313,19 +323,41 @@ public class ParametresCapteur extends JFrame {
 
     private boolean checkIntervalle()
     {
+        try{
+            if (isExterieur) {
+                Integer.parseInt(latitude.getText());
+                Integer.parseInt(longitude.getText());
+            }
+            Integer.parseInt(min.getText());
+            Integer.parseInt(max.getText());
+        }catch (NumberFormatException numFE)
+        {
+            printErr("Erreur : Des entiers sont attendu !");
+            return false;
+        }
         if (isExterieur) {
-            if (Integer.valueOf(latitude.getText()) < 0 || Integer.valueOf(latitude.getText()) > 90 || latitude.getText() == "") {
-                printErr("Erreur : La latitude est une mesure angulaire s'étendant de 0° à l'équateur à 90° !");
+            if (latitude.getText().equals("") || longitude.getText().equals(""))
+            {
+                printErr("Erreur : La latitude comprise entre 0° et 90° !");
                 return false;
             }
-            if (Integer.valueOf(longitude.getText()) < -180 || Integer.valueOf(longitude.getText()) > 180 || longitude.getText() == "") {
-                printErr("Erreur : La longitude est une mesure angulaire s'étendant de -180° à l'équateur à 180° !");
+            if (Double.parseDouble(latitude.getText()) < 0 || Double.parseDouble(latitude.getText()) > 90) {
+                printErr("Erreur : La latitude comprise entre 0° et 90° !");
+                return false;
+            }
+            if (Double.parseDouble(longitude.getText()) < -180 || Double.parseDouble(longitude.getText()) > 180) {
+                printErr("Erreur : La longitude comprise entre -180° et 180° !");
                 return false;
             }
         }
-        if (Integer.valueOf(min.getText()) > Integer.valueOf(max.getText()) || min.getText() == "" || max.getText() == "")
+        if (min.getText().equals("") || max.getText().equals(""))
         {
-            printErr("Erreur : L'intervalle minimal doit être inférieur ou égal à l'intervalle max !");
+            printErr("Erreur : L'intervalle doit possèder des valeurs");
+            return false;
+        }
+        if (Integer.parseInt(min.getText()) > Integer.parseInt(max.getText()))
+        {
+            printErr("Erreur : Cet intervalle n'est pas sensé !");
             return false;
         }
         return true;
@@ -335,16 +367,16 @@ public class ParametresCapteur extends JFrame {
     {
         if (isExterieur == false && isInterieur == false)
         {
-            printErr("Erreur : Le bouton Exterieur ou le bouton Interieur doit être coché !");
+            printErr("Erreur : Où se trouve votre capteur ?");
             return false;
         }
         if (isExterieur)
         {
-            return (this.checkIntervalle() && this.checkChampTexte(idCapteur) && this.checkChampTexte(typeDonnees));
+            return (this.checkIntervalle() && this.checkChampTexte(idCapteur) && this.checkChampTexte(typeDonnees) && this.checkComboBox());
         }
         else
         {
-            return (this.checkIntervalle() && this.checkChampTexte(idCapteur) && this.checkChampTexte(typeDonnees) && this.checkChampTexte(posRelative));
+            return (this.checkIntervalle() && this.checkChampTexte(idCapteur) && this.checkChampTexte(typeDonnees) && this.checkChampTexte(posRelative) && this.checkComboBox());
         }
     }
 }

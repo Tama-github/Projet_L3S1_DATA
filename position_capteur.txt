@@ -1,16 +1,16 @@
 /*******************
-format des définition de données:
+format des dÃ©finition de donnÃ©es:
 batiment1(etage1(salle1.salle2.salle3)etage2(salle1))
 batiment2(etage1(salle1))
 
-format non supporté :
+format non supportï¿½ :
 batiment()
 batiment (etage())
 batiment(etage())
 
 *******************/
-;Batiment Administratif(3iem etage(305))
-U3(2iem etage(217.201.208)3iem etage(305.306.308.307)1ier etage(101.102.103)rdc(01.01bis))
-U1(1ier etage(101.108.109))
+;Batiment Administratif(3e etage(305))
+U3(2e etage(217.201.208)3e etage(305.306.308.307)1er etage(101.102.103)rdc(01.01bis))
+U1(1er etage(101.108.109))
 ;
 
