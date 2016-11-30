@@ -101,8 +101,10 @@ public class SimulationInterface {
                         {
                             jLang2.printStackTrace();
                         }
-
                     }
+                    parametresCapteur.setVisible(false);
+                    fenetreConnexionIP.setVisible(true);
+
                 }
             }
         });

@@ -295,12 +295,13 @@ public class ParametresCapteur extends JFrame {
 
     private boolean checkComboBox()
     {
-        if (this.getBatiment().getSelectedItem().toString().equals("Sélection") || this.getEtage().getSelectedItem().toString().equals("Sélection") || this.getSalle().getSelectedItem().toString().equals("Sélection"))
-        {
-            printErr("Erreur : Où se trouve votre capteur ?");
-            return false;
+        if (isInterieur) {
+            if (this.getBatiment().getSelectedItem().toString().equals("Sélection") || this.getEtage().getSelectedItem().toString().equals("Sélection") || this.getSalle().getSelectedItem().toString().equals("Sélection")) {
+                printErr("Erreur : Où se trouve votre capteur ?");
+                return false;
+            }
         }
-        return true;
+            return true;
     }
 
     private boolean checkChampTexte(JFormattedTextField champText)
