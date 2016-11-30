@@ -2,6 +2,9 @@ package Simulation;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * Created by jb on 28/11/16.
@@ -11,8 +14,6 @@ public class ParametresCapteur extends JFrame {
 
     private JFormattedTextField idCapteur = new JFormattedTextField();
     private JFormattedTextField typeDonnees = new JFormattedTextField();
-    private JRadioButton interieur = new JRadioButton("Intérieur ");
-    private JRadioButton exterieur =  new JRadioButton("Extérieur ");
     private JTextField latitude = new JTextField();
     private JTextField longitude = new JTextField();
     private JComboBox batiment = new JComboBox();
@@ -23,6 +24,8 @@ public class ParametresCapteur extends JFrame {
     private JFormattedTextField min = new JFormattedTextField();
     private JFormattedTextField max = new JFormattedTextField();
     private JButton valider = new JButton("Valider");
+    private boolean isExterieur = false;
+    private boolean isInterieur = false;
 
 
     public ParametresCapteur()
@@ -51,12 +54,15 @@ public class ParametresCapteur extends JFrame {
         JPanel pInterval = new JPanel();
         JLabel lInter1 = new JLabel("Intervalle de ");
         JLabel lInter2 = new JLabel(" à ");
+        JPanel spValider = new JPanel();
         JPanel pValider = new JPanel();
 
+        JRadioButton interieur = new JRadioButton("Intérieur ");
+        JRadioButton exterieur =  new JRadioButton("Extérieur ");
 
-
-
-
+        batiment.addItem("Selection");
+        etage.addItem("Selection");
+        salle.addItem("Selection");
 
         this.setTitle("Parametres Capteurs");
         this.setSize(400,350);
@@ -118,13 +124,55 @@ public class ParametresCapteur extends JFrame {
         pInterval.add(lInter2);
         pInterval.add(max);
 
+        spValider.add(pValider);
         pValider.add(valider);
 
         princParam.add(pIdCapteur);
         princParam.add(pTypeDonnees);
         princParam.add(pLocalisation);
         princParam.add(pInterval);
-        princParam.add(pValider);
+        princParam.add(spValider);
+
+
+        interieur.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                super.mouseClicked(mouseEvent);
+                isInterieur = true;
+                isExterieur = false;
+                latitude.setEditable(false);
+                longitude.setEditable(false);
+                batiment.setEnabled(true);
+                etage.setEnabled(true);
+                salle.setEnabled(true);
+                posRelative.setEditable(true);
+            }
+        });
+
+        exterieur.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                super.mouseClicked(mouseEvent);
+                isExterieur = true;
+                isInterieur = false;
+                latitude.setEditable(true);
+                longitude.setEditable(true);
+                batiment.setEnabled(false);
+                etage.setEnabled(false);
+                salle.setEnabled(false);
+                posRelative.setEditable(false);
+            }
+        });
+
+        batiment.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                super.mouseClicked(mouseEvent);
+
+            }
+        });
+
+
 
 
         this.setContentPane(princParam);
@@ -132,6 +180,7 @@ public class ParametresCapteur extends JFrame {
         this.setVisible(true);
 
     }
+
 
     static public void main(String[] args)
     {
@@ -144,14 +193,6 @@ public class ParametresCapteur extends JFrame {
 
     public JFormattedTextField getTypeDonnees() {
         return typeDonnees;
-    }
-
-    public JRadioButton getInterieur() {
-        return interieur;
-    }
-
-    public JRadioButton getExterieur() {
-        return exterieur;
     }
 
     public JTextField getLatitude() {
@@ -194,4 +235,19 @@ public class ParametresCapteur extends JFrame {
         return valider;
     }
 
+    public boolean isExterieur() {
+        return isExterieur;
+    }
+
+    public boolean isInterieur() {
+        return isInterieur;
+    }
+
+    public void setExterieur(boolean exterieur) {
+        isExterieur = exterieur;
+    }
+
+    public void setInterieur(boolean interieur) {
+        isInterieur = interieur;
+    }
 }
