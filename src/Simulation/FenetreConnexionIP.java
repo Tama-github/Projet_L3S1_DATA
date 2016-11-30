@@ -7,12 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.regex.Pattern;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 
 public class FenetreConnexionIP extends JFrame {
@@ -28,7 +23,7 @@ public class FenetreConnexionIP extends JFrame {
 	private JTextField jtfIP = new JTextField();
 	private JLabel label1 = new JLabel("Adresse IP : ");
 	
-	private JTextField jtfPORT = new JTextField();
+	private JSpinner jtfPORT = new JSpinner();
 	private JLabel label2 = new JLabel("     Port : ");
 	
 	private JButton buttonConnection = new JButton("Connexion");
@@ -72,6 +67,7 @@ public class FenetreConnexionIP extends JFrame {
 	    container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
 	    container.add(ligneHaut);
 	    container.add(ligneBas);
+        container.add(labelError);
 			
 	    this.getContentPane().add(container);
 	}
@@ -90,9 +86,9 @@ public class FenetreConnexionIP extends JFrame {
 	/**
 	 *  Champs du port
 	 *
-	 *  @return JTextField : Renvoie le champs de texte contenant le port de connexion
+	 *  @return JSpinner : Renvoie le champs de texte contenant le port de connexion
 	 */
-	public JTextField getJtfPORT() {
+	public JSpinner getJtfPORT() {
 		return this.jtfPORT;
 	}
 
@@ -128,8 +124,18 @@ public class FenetreConnexionIP extends JFrame {
 		return ipPattern.matcher(ip).find();
 	}
 
+	public void printErr(String msg)
+	{
+		this.labelError.setForeground(Color.red);
+		this.labelError.setText(msg);
+		this.setSize(500,150);
+	}
 
-	public static void main(String[] args) {
+    public JLabel getLabelError() {
+        return labelError;
+    }
+
+    public static void main(String[] args) {
 		FenetreConnexionIP a = new FenetreConnexionIP();
 		a.setVisible(true);
 		System.out.println(a.verifIP("192.161.1.25"));

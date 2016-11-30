@@ -45,6 +45,80 @@ public class SimulationInterface {
         /* creation de la fenetre de gestion d'envoie */
         this.fenetreGestionEnvoie = new FenetreGestionEnvoie();
         this.fenetreGestionEnvoie.setVisible(false);
+
+        /* Gestion evenement de la fenetre de creatin du capteur */
+        this.parametresCapteur.getValider().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent clickValider) {
+                super.mouseClicked(clickValider);
+                if (parametresCapteur.checkFormulaireParamCapteur()) {
+                    parametresCapteur.getErreur().setText("");
+                    parametresCapteur.setSize(400, 350);
+                    id = parametresCapteur.getIdCapteur().getText();
+                    type = parametresCapteur.getType().toString();
+                    valeurMin = Integer.parseInt(parametresCapteur.getMin().getText());
+                    valeurMax = Integer.parseInt(parametresCapteur.getMax().getText());
+
+                    if (parametresCapteur.isExterieur()) {
+                        try {
+                            localisation = new LocalisationExterieur("exterieur", Double.parseDouble(parametresCapteur.getLatitude().getText()), Double.parseDouble(parametresCapteur.getLongitude().getText()));
+                        } catch (Exception jLang1) {
+                            jLang1.printStackTrace();
+                        }
+                    } else {
+                        try {
+                            LocalisationInterieur locInt = new LocalisationInterieur("interieur");
+                            locInt.setBatiment(parametresCapteur.getBatiment().getSelectedItem().toString());
+                            locInt.setEtage(parametresCapteur.getEtage().getSelectedItem().toString());
+                            locInt.setSalle(parametresCapteur.getSalle().getSelectedItem().toString());
+                            locInt.setInfoSup(parametresCapteur.getPosRelative().getText());
+                        } catch (Exception jLang2) {
+                            jLang2.printStackTrace();
+                        }
+                    }
+                    parametresCapteur.setVisible(false);
+                    fenetreConnexionIP.setVisible(true);
+
+                }
+            }
+        });
+
+        /* Gestion d'evenement de la fenetre de connexion */
+        this.fenetreConnexionIP.getButtonCancel().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                fenetreConnexionIP.setVisible(false);
+                parametresCapteur.setVisible(true);
+            }
+        });
+
+        this.fenetreConnexionIP.getButtonConnection().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (fenetreConnexionIP.verifIP(fenetreConnexionIP.getJtfIP().getText()) && (int)fenetreConnexionIP.getJtfPORT().getValue() >= 0) {
+                    fenetreConnexionIP.getLabelError().setText("");
+                    ip = fenetreConnexionIP.getJtfIP().getText();
+                    port = (int)fenetreConnexionIP.getJtfPORT().getValue();
+
+                    try {
+                        if(connexionCapteur().equals("ConnexionKO")) {
+                            fenetreConnexionIP.printErr("Erreur lors de la connexion au serveur");
+                        } else {
+                            fenetreConnexionIP.setVisible(false);
+                            fenetreGestionEnvoie.setVisible(true);
+                        }
+                    } catch (IOException e1) {
+                        fenetreConnexionIP.printErr("Erreur lors de la connexion au serveur");
+                    }
+                } else {
+                    fenetreConnexionIP.printErr("L'adresse IP et le port doivent etre valide.");
+                }
+            }
+        });
+
+        /* Gestion des evenements de la fenetre d'envoie de donnees */
         this.fenetreGestionEnvoie.getDeconnexion().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -68,47 +142,7 @@ public class SimulationInterface {
             }
         });
 
-        this.parametresCapteur.getValider().addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent clickValider) {
-                super.mouseClicked(clickValider);
-                if (parametresCapteur.checkFormulaireParamCapteur())
-                {
-                    parametresCapteur.getErreur().setVisible(false);
-                    parametresCapteur.setSize(400, 350);
-                    id = parametresCapteur.getIdCapteur().getText();
-                    type = parametresCapteur.getType().toString();
-                    valeurMin = Integer.parseInt(parametresCapteur.getMin().getText());
-                    valeurMax = Integer.parseInt(parametresCapteur.getMax().getText());
 
-                    if (parametresCapteur.isExterieur())
-                    {
-                        try {
-                            localisation = new LocalisationExterieur("exterieur",Double.parseDouble(parametresCapteur.getLatitude().getText()), Double.parseDouble(parametresCapteur.getLongitude().getText()));
-                        }catch(Exception jLang1)
-                        {
-                            jLang1.printStackTrace();
-                        }
-                    }
-                    else
-                    {
-                        try{
-                            LocalisationInterieur locInt = new LocalisationInterieur("interieur");
-                            locInt.setBatiment(parametresCapteur.getBatiment().getSelectedItem().toString());
-                            locInt.setEtage(parametresCapteur.getEtage().getSelectedItem().toString());
-                            locInt.setSalle(parametresCapteur.getSalle().getSelectedItem().toString());
-                            locInt.setInfoSup(parametresCapteur.getPosRelative().getText());
-                        }catch(Exception jLang2)
-                        {
-                            jLang2.printStackTrace();
-                        }
-                    }
-                    parametresCapteur.setVisible(false);
-                    fenetreConnexionIP.setVisible(true);
-
-                }
-            }
-        });
 
     }
 
