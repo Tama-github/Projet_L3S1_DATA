@@ -75,53 +75,64 @@ public class FenetreConnexionIP extends JFrame {
 			
 	    this.getContentPane().add(container);
 	}
-	
-	
+
+
+	/**
+	 *  Champs d'dresse IP
+	 *
+	 *  @return JTextField : Renvoie le champs de texte contenant l'adresse IP de connexion
+	 */
 	public JTextField getJtfIP() {
 		return this.jtfIP;
 	}
-	
 
+
+	/**
+	 *  Champs du port
+	 *
+	 *  @return JTextField : Renvoie le champs de texte contenant le port de connexion
+	 */
 	public JTextField getJtfPORT() {
 		return this.jtfPORT;
 	}
-	
 
+
+	/**
+	 *  Bouton "Connexion"
+	 *
+	 *  @return JButton : Renvoie le bouton de connexion
+	 */
 	public JButton getButtonConnection() {
 		return this.buttonConnection;
 	}
-	
 
+
+	/**
+	 *  Bouton "Annuler"
+	 *
+	 *  @return JButton : Renvoie le bouton d'annulation
+	 */
 	public JButton getButtonCancel() {
 		return this.buttonCancel;
 	}
-	
-	
-	public boolean verifIP () {
-		// À faire
-		return false;
-	}
 
 
-	public void mouseExited(MouseEvent event) {
-
-		//Nous changeons le fond de notre image pour le vert lorsque nous quittons le bouton, avec le fichier fondBouton.png
-
-		/*try {
-
-			img = ImageIO.read(new File("fondBouton.png"));
-
-		} catch (IOException e) {
-
-			e.printStackTrace();
-
-		}*/
-
+	/**
+	 *  Vérification de la conformité de l'IP passée en paramètre
+	 *
+	 *  @param ip String : L'adresse IP à tester
+	 *
+	 *  @return boolean : Renvoie true si l'adresse IP est conforme
+	 */
+	public boolean verifIP (String ip) {
+		return ipPattern.matcher(ip).find();
 	}
 
 
 	public static void main(String[] args) {
-		JFrame a = new FenetreConnexionIP();
+		FenetreConnexionIP a = new FenetreConnexionIP();
+		a.setVisible(true);
+		System.out.println(a.verifIP("192.161.1.25"));
 		return;
 	}
 }
