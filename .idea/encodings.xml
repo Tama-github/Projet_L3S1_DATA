@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/src/Simulation/EnvoieThread.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Simulation/FenetreGestionEnvoie.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Simulation/Localisation.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Simulation/LocalisationExterieur.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Simulation/LocalisationInterieur.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Simulation/Main.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Simulation/Parseur.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Simulation/ServicesReseau.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/Simulation/SimulationInterface.java" charset="UTF-8" />
   </component>
 </project>

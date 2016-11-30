@@ -18,7 +18,7 @@ public class ServicesReseau {
     private BufferedReader reader;
 
     /**
-     * Buffer d'écriture du socket
+     * Buffer d'Ã©criture du socket
      */
     private BufferedWriter writer;
 
@@ -28,7 +28,7 @@ public class ServicesReseau {
     private boolean estConnecte = false;
 
     /**
-     * Constructeur d'un service réseau
+     * Constructeur d'un service rÃ©seau
      */
     public ServicesReseau () {}
 

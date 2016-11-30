@@ -1,6 +1,8 @@
 package Simulation;
 
 import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 /**
@@ -25,7 +27,7 @@ public class SimulationInterface {
     private ParametresCapteur parametresCapteur;
     private FenetreConnexionIP fenetreConnexionIP;
     private FenetreGestionEnvoie fenetreGestionEnvoie;
-
+    private EnvoieThread envoieThread;
 
     public SimulationInterface () {
         /* Gestionnaire des services reseau */
@@ -41,6 +43,28 @@ public class SimulationInterface {
         /* creation de la fenetre de gestion d'envoie */
         this.fenetreGestionEnvoie = new FenetreGestionEnvoie();
         this.fenetreGestionEnvoie.setVisible(false);
+        this.fenetreGestionEnvoie.getDeconnexion().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                callbackDeconnexion();
+            }
+        });
+
+        this.fenetreGestionEnvoie.getEnvoie().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                envoieThread = new EnvoieThread(servicesReseau,
+                        (int) fenetreGestionEnvoie.getFrequanceEnvoie().getValue(),
+                        fenetreGestionEnvoie.isAlea(),
+                        (int) fenetreGestionEnvoie.getValeur().getValue(),
+                        valeurMin,
+                        valeurMax);
+                fenetreGestionEnvoie.getEnvoie().setText("rafraichir");
+            }
+        });
+
 
     }
 
@@ -52,14 +76,6 @@ public class SimulationInterface {
             throw new IOException();
         }
         return this.servicesReseau.recevoir();
-    }
-
-    public void envoieDonneeCapteur () throws IOException {
-        if (this.fenetreGestionEnvoie.isAlea()) {
-            this.servicesReseau.envoyer("ValeurCapteur;" + (Math.random()*(this.valeurMax-this.valeurMin) + this.valeurMin) + "\n");
-        } else {
-            this.servicesReseau.envoyer("ValeurCapteur;" + this.valeurEnvoie + "\n");
-        }
     }
 
     public String deconnexionCapteur () throws IOException {
@@ -74,6 +90,18 @@ public class SimulationInterface {
         return res;
     }
 
+    public void callbackDeconnexion () {
+        try {
+            deconnexionCapteur();
+        } catch (IOException e) {
+            /*ne rien faire*/
+        } finally {
+            this.envoieThread.setRunning(false);
+            this.fenetreGestionEnvoie.setVisible(false);
+            this.fenetreGestionEnvoie.getEnvoie().setText("Envoie des donnees");
+            this.fenetreConnexionIP.setVisible(true);
+        }
+    }
 
 
     public static void main (String [] args) {
