@@ -182,7 +182,8 @@ public class SimulationInterface {
         } catch (IOException e) {
             /*ne rien faire*/
         } finally {
-            this.envoieThread.setRunning(false);
+            if (this.envoieThread.isRunning())
+                this.envoieThread.setRunning(false);
             this.fenetreGestionEnvoie.setVisible(false);
             this.fenetreGestionEnvoie.getEnvoie().setText("Envoie des donnees");
             this.fenetreConnexionIP.setVisible(true);
