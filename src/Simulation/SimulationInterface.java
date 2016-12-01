@@ -171,6 +171,8 @@ public class SimulationInterface {
             res = this.servicesReseau.recevoir();
             if (res.equals("DeconnexionOK")) {
                 this.servicesReseau.deconnexion();
+            } else {
+                this.servicesReseau.deconnexion();
             }
         }
         return res;
