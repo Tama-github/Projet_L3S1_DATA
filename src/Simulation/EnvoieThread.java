@@ -39,6 +39,12 @@ public class EnvoieThread extends Thread implements Runnable {
         }
     }
 
+    /**
+     * produit la chaine de caractère a envoyer au server.
+     *
+     * @return String : si on est connecte, on retourne le prochain message du socket, si non on retourne "pas connecte"
+     * @throws IOException
+     */
     public String getStringPourEnvoie () throws IOException {
         if (this.alea) {
             return "ValeurCapteur;" + (Math.random()*(this.max-this.min) + this.min) + "\n";

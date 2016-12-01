@@ -3,7 +3,7 @@ format des définition de données:
 batiment1(etage1(salle1.salle2.salle3)etage2(salle1))
 batiment2(etage1(salle1))
 
-format non support� :
+format non supporte :
 batiment()
 batiment (etage())
 batiment(etage())
