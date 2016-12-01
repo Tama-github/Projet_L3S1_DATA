@@ -88,6 +88,10 @@ public class ServicesReseau {
         return estConnecte;
     }
 
+    public void setEstConnecte(boolean estConnecte) {
+        this.estConnecte = estConnecte;
+    }
+
     public static void main (String [] args) {
         ServicesReseau sr = new ServicesReseau();
         try {

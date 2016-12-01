@@ -67,8 +67,7 @@ public class SimulationInterface {
                         }
                     } else {
                         try {
-                            System.out.println("interieur");
-                            LocalisationInterieur locInt = new LocalisationInterieur("interieur",
+                            localisation = new LocalisationInterieur("interieur",
                                     parametresCapteur.getBatiment().getSelectedItem().toString(),
                                     parametresCapteur.getEtage().getSelectedItem().toString(),
                                     parametresCapteur.getSalle().getSelectedItem().toString(),
@@ -151,16 +150,18 @@ public class SimulationInterface {
     }
 
     public String connexionCapteur () throws IOException {
+        String res = "";
         if (!this.servicesReseau.estConnecte()) {
             this.servicesReseau.connexion(this.ip, this.port);
-            System.out.println(this.id);
-            System.out.println(this.type);
-            System.out.println(this.localisation.getStringForConnexion());
             this.servicesReseau.envoyer("ConnexionCapteur;" + this.id + ";" + this.type + ";" + this.localisation.getStringForConnexion() + "\n");
         } else {
             throw new IOException();
         }
-        return this.servicesReseau.recevoir();
+        res = this.servicesReseau.recevoir();
+        if (res.equals("ConnexionKO")) {
+            this.servicesReseau.deconnexion();
+        }
+        return res;
     }
 
     public String deconnexionCapteur () throws IOException {
