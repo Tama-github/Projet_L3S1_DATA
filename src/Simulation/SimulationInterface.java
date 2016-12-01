@@ -182,7 +182,7 @@ public class SimulationInterface {
         } catch (IOException e) {
             /*ne rien faire*/
         } finally {
-            if (this.envoieThread.isRunning())
+            if (this.envoieThread != null && this.envoieThread.isRunning())
                 this.envoieThread.setRunning(false);
             this.fenetreGestionEnvoie.setVisible(false);
             this.fenetreGestionEnvoie.getEnvoie().setText("Envoie des donnees");
