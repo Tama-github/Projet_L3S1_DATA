@@ -17,13 +17,15 @@ public class FenetreGestionEnvoie extends JFrame {
     private JSpinner frequanceEnvoie;
     private JButton envoie;
     private JButton deconnexion;
+    private JLabel erreurText;
 
     public FenetreGestionEnvoie () {
         super("Gestion d'envoie");
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(300, 300);
-        GridLayout grid = new GridLayout(4,1);
+        this.setResizable(false);
+        GridLayout grid = new GridLayout(5,1);
         JPanel mainContainer = new JPanel();
         mainContainer.setLayout(grid);
 
@@ -74,7 +76,7 @@ public class FenetreGestionEnvoie extends JFrame {
         mainContainer.add(subContainerFixe);
 
         /* Frequence d'envoie */
-        JLabel freq = new JLabel("Frequance d'envoie");
+        JLabel freq = new JLabel("Frequence d'envoie (ms)");
         this.frequanceEnvoie = new JSpinner();
         subContainerFreq.add(freq);
         subContainerFreq.add(this.frequanceEnvoie);
@@ -88,7 +90,13 @@ public class FenetreGestionEnvoie extends JFrame {
         subContainerButton.add(this.envoie);
         subContainerButton.add(this.deconnexion);
 
+
+
         mainContainer.add(subContainerButton);
+
+        this.erreurText = new JLabel("");
+
+        mainContainer.add(this.erreurText);
 
         this.add(mainContainer);
         this.pack();
@@ -118,6 +126,16 @@ public class FenetreGestionEnvoie extends JFrame {
         return deconnexion;
     }
 
+    public void printErr(String msg)
+    {
+        this.erreurText.setForeground(Color.red);
+        this.erreurText.setText(msg);
+        this.setSize(500,150);
+    }
+
+    public JLabel getErreurText() {
+        return erreurText;
+    }
 
     public static void main (String args[]) {
         FenetreGestionEnvoie fge = new FenetreGestionEnvoie();

@@ -133,7 +133,8 @@ public class SimulationInterface {
                 super.mouseClicked(e);
                 if (envoieThread != null)
                     envoieThread.interrupt();
-                if (((int) fenetreGestionEnvoie.getFrequanceEnvoie().getValue() > 0))
+                if (((int) fenetreGestionEnvoie.getFrequanceEnvoie().getValue() > 0) &&
+                        (fenetreGestionEnvoie.isAlea() || (((int)fenetreGestionEnvoie.getValeur().getValue() > valeurMin) && (int)fenetreGestionEnvoie.getValeur().getValue() < valeurMax)))
                 {
                     envoieThread = new EnvoieThread(servicesReseau,
                             (int) fenetreGestionEnvoie.getFrequanceEnvoie().getValue(),
@@ -144,6 +145,12 @@ public class SimulationInterface {
 
                     envoieThread.start();
                     fenetreGestionEnvoie.getEnvoie().setText("rafraichir");
+                    fenetreGestionEnvoie.getErreurText().setText("");
+                } else {
+                    if (((int) fenetreGestionEnvoie.getFrequanceEnvoie().getValue() <= 0))
+                        fenetreGestionEnvoie.printErr("La frequence doit être supérieur a 0.");
+                    else
+                        fenetreGestionEnvoie.printErr("Valeur incorrecte, intervale : "+ valeurMin + " et " + valeurMax);
                 }
             }
         });
