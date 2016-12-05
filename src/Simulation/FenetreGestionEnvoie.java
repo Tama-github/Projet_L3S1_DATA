@@ -137,8 +137,4 @@ public class FenetreGestionEnvoie extends JFrame {
         return erreurText;
     }
 
-    public static void main (String args[]) {
-        FenetreGestionEnvoie fge = new FenetreGestionEnvoie();
-        fge.setVisible(true);
-    }
 }

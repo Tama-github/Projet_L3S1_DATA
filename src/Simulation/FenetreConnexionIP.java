@@ -135,10 +135,4 @@ public class FenetreConnexionIP extends JFrame {
         return labelError;
     }
 
-    public static void main(String[] args) {
-		FenetreConnexionIP a = new FenetreConnexionIP();
-		a.setVisible(true);
-		System.out.println(a.verifIP("192.161.1.25"));
-		return;
-	}
 }

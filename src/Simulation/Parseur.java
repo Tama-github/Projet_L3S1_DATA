@@ -182,15 +182,4 @@ public class Parseur {
         return res;
     }
 
-    //main de test
-    static public void main (String [] args) {
-        ArrayList<String> a = Parseur.getBatiments("position_capteur.txt");
-        System.out.println(a);
-        a = Parseur.getEtagesForBatoment("position_capteur.txt", "U3");
-        System.out.println(a);
-        a = Parseur.getSallesForEtageAndBatoment("position_capteur.txt", "U3", "3iem etage");
-        System.out.println(a);
-
-    }
-
 }

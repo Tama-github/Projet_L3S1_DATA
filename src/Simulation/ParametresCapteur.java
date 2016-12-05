@@ -215,10 +215,6 @@ public class ParametresCapteur extends JFrame {
     }
 
 
-    static public void main(String[] args) {
-        ParametresCapteur test = new ParametresCapteur();
-    }
-
     public JFormattedTextField getIdCapteur() {
         return idCapteur;
     }

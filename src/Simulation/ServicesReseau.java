@@ -92,19 +92,4 @@ public class ServicesReseau {
         this.estConnecte = estConnecte;
     }
 
-    public static void main (String [] args) {
-        ServicesReseau sr = new ServicesReseau();
-        try {
-            sr.connexion("127.0.0.1", 43567);
-            sr.envoyer("test"+'\n');
-            Thread.sleep(4000);
-            sr.deconnexion();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-    }
-
 }
