@@ -4,7 +4,8 @@ package Simulation;
 import java.io.IOException;
 
 /**
- * Created by msi on 30/11/2016.
+ * Thread qui gère l'envoie des donnée au serveur
+ * @autor Ludovic BURG
  */
 public class EnvoieThread extends Thread implements Runnable {
     private ServicesReseau servicesReseau;

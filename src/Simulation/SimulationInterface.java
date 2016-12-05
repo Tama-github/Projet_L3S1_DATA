@@ -12,24 +12,26 @@ import java.security.acl.LastOwnerException;
  */
 public class SimulationInterface {
 
-    /*
-     *  Infos du capteur
-     */
+
+    /* Infos du capteur */
     private String id;
     private String type;
     private Localisation localisation;
     private int valeurMin;
     private int valeurMax;
 
+    /* Info reseau */
     private ServicesReseau servicesReseau;
     private String ip;
     private int port;
     private int valeurEnvoie;
+    private EnvoieThread envoieThread = null;
 
+    /* Fenetres de l'application */
     private ParametresCapteur parametresCapteur;
     private FenetreConnexionIP fenetreConnexionIP;
     private FenetreGestionEnvoie fenetreGestionEnvoie;
-    private EnvoieThread envoieThread = null;
+
 
     public SimulationInterface () {
         /* Gestionnaire des services reseau */
@@ -156,6 +158,11 @@ public class SimulationInterface {
         });
     }
 
+    /**
+     * connecte un capteur au serveur de gestion
+     * @return String : etat de la connexion
+     * @throws IOException
+     */
     public String connexionCapteur () throws IOException {
         String res = "";
         if (!this.servicesReseau.estConnecte()) {
@@ -171,6 +178,11 @@ public class SimulationInterface {
         return res;
     }
 
+    /**
+     * deconnecte un capteur du serveur de gestion
+     * @return String : etat de la deconnexion
+     * @throws IOException
+     */
     public String deconnexionCapteur () throws IOException {
         String res = "DeconnexionKO";
         if (this.servicesReseau.estConnecte()) {
@@ -185,6 +197,9 @@ public class SimulationInterface {
         return res;
     }
 
+    /**
+     * fonction de deconnection (gestion du thread d'envoie)
+     */
     public void callbackDeconnexion () {
         try {
             deconnexionCapteur();
@@ -198,7 +213,6 @@ public class SimulationInterface {
             this.fenetreConnexionIP.setVisible(true);
         }
     }
-
 
     public static void main (String [] args) {
         SimulationInterface simulationInterface = new SimulationInterface();

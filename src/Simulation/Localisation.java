@@ -17,5 +17,9 @@ public abstract class Localisation {
         return type;
     }
 
+    /**
+     *
+     * @return String : chaine de caratère a envoyer sur le reseau
+     */
     public abstract String getStringForConnexion();
 }

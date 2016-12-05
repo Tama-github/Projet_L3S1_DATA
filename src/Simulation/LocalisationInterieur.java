@@ -9,6 +9,15 @@ public class LocalisationInterieur extends Localisation {
     private String salle;
     private String infoSup;
 
+    /**
+     * Constructeur
+     * @param type
+     * @param batiment
+     * @param etage
+     * @param salle
+     * @param infoSup
+     * @throws Exception
+     */
     public LocalisationInterieur (String type, String batiment, String etage, String salle, String infoSup) throws Exception {
         super(type);
         this.batiment = batiment;

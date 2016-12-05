@@ -7,6 +7,13 @@ public class LocalisationExterieur extends Localisation {
     public double latitude;
     public double longitude;
 
+    /**
+     * costructeur
+     * @param type
+     * @param latitude
+     * @param longitude
+     * @throws Exception
+     */
     public LocalisationExterieur (String type, double latitude, double longitude) throws Exception{
         super(type);
         this.latitude = latitude;

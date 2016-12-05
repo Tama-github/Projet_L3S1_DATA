@@ -126,13 +126,20 @@ public class FenetreGestionEnvoie extends JFrame {
         return deconnexion;
     }
 
-    public void printErr(String msg)
-    {
+    /**
+     * Ecris un message d'erreur à l'endroit prévu a cet effet
+     * @param msg : le message a ecrire
+     */
+    public void printErr(String msg) {
         this.erreurText.setForeground(Color.red);
         this.erreurText.setText(msg);
         this.setSize(500,150);
     }
 
+    /**
+     * 
+     * @return JLabel : l'objet de text d'erreur
+     */
     public JLabel getErreurText() {
         return erreurText;
     }
