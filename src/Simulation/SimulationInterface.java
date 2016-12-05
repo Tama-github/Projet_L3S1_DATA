@@ -1,11 +1,8 @@
 package Simulation;
 
-import javax.swing.*;
-import javax.swing.tree.ExpandVetoException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.security.acl.LastOwnerException;
 
 /**
  * Created by msi on 23/11/2016.
@@ -25,12 +22,12 @@ public class SimulationInterface {
     private String ip;
     private int port;
     private int valeurEnvoie;
-    private EnvoieThread envoieThread = null;
+    private EnvoiThread envoieThread = null;
 
     /* Fenetres de l'application */
     private ParametresCapteur parametresCapteur;
     private FenetreConnexionIP fenetreConnexionIP;
-    private FenetreGestionEnvoie fenetreGestionEnvoie;
+    private FenetreGestionEnvoi fenetreGestionEnvoi;
 
 
     public SimulationInterface () {
@@ -45,8 +42,8 @@ public class SimulationInterface {
         this.fenetreConnexionIP.setVisible(false);
 
         /* creation de la fenetre de gestion d'envoie */
-        this.fenetreGestionEnvoie = new FenetreGestionEnvoie();
-        this.fenetreGestionEnvoie.setVisible(false);
+        this.fenetreGestionEnvoi = new FenetreGestionEnvoi();
+        this.fenetreGestionEnvoi.setVisible(false);
 
         /* Gestion evenement de la fenetre de creatin du capteur */
         this.parametresCapteur.getValider().addMouseListener(new MouseAdapter() {
@@ -109,7 +106,7 @@ public class SimulationInterface {
                             fenetreConnexionIP.printErr("Erreur lors de la connexion au serveur");
                         } else {
                             fenetreConnexionIP.setVisible(false);
-                            fenetreGestionEnvoie.setVisible(true);
+                            fenetreGestionEnvoi.setVisible(true);
                         }
                     } catch (IOException e1) {
                         fenetreConnexionIP.printErr("Erreur lors de la connexion au serveur");
@@ -121,7 +118,7 @@ public class SimulationInterface {
         });
 
         /* Gestion des evenements de la fenetre d'envoie de donnees */
-        this.fenetreGestionEnvoie.getDeconnexion().addMouseListener(new MouseAdapter() {
+        this.fenetreGestionEnvoi.getDeconnexion().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -129,30 +126,30 @@ public class SimulationInterface {
             }
         });
 
-        this.fenetreGestionEnvoie.getEnvoie().addMouseListener(new MouseAdapter() {
+        this.fenetreGestionEnvoi.getEnvoi().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (envoieThread != null)
                     envoieThread.interrupt();
-                if (((int) fenetreGestionEnvoie.getFrequanceEnvoie().getValue() > 0) &&
-                        (fenetreGestionEnvoie.isAlea() || (((int)fenetreGestionEnvoie.getValeur().getValue() > valeurMin) && (int)fenetreGestionEnvoie.getValeur().getValue() < valeurMax)))
+                if (((int) fenetreGestionEnvoi.getFrequenceEnvoi().getValue() > 0) &&
+                        (fenetreGestionEnvoi.isAlea() || (((int) fenetreGestionEnvoi.getValeur().getValue() >= valeurMin) && (int) fenetreGestionEnvoi.getValeur().getValue() <= valeurMax)))
                 {
-                    envoieThread = new EnvoieThread(servicesReseau,
-                            (int) fenetreGestionEnvoie.getFrequanceEnvoie().getValue(),
-                            fenetreGestionEnvoie.isAlea(),
-                            (int) fenetreGestionEnvoie.getValeur().getValue(),
+                    envoieThread = new EnvoiThread(servicesReseau,
+                            (int) fenetreGestionEnvoi.getFrequenceEnvoi().getValue(),
+                            fenetreGestionEnvoi.isAlea(),
+                            (int) fenetreGestionEnvoi.getValeur().getValue(),
                             valeurMin,
                             valeurMax);
 
                     envoieThread.start();
-                    fenetreGestionEnvoie.getEnvoie().setText("rafraichir");
-                    fenetreGestionEnvoie.getErreurText().setText("");
+                    fenetreGestionEnvoi.getEnvoi().setText("Rafraichir");
+                    fenetreGestionEnvoi.getErreurText().setText("");
                 } else {
-                    if (((int) fenetreGestionEnvoie.getFrequanceEnvoie().getValue() <= 0))
-                        fenetreGestionEnvoie.printErr("La frequence doit être supérieur a 0.");
+                    if (((int) fenetreGestionEnvoi.getFrequenceEnvoi().getValue() <= 0))
+                        fenetreGestionEnvoi.printErr("Erreur : La fréquence doit être supérieure a 0.");
                     else
-                        fenetreGestionEnvoie.printErr("Valeur incorrecte, intervale : "+ valeurMin + " et " + valeurMax);
+                        fenetreGestionEnvoi.printErr("Erreur : La valeur doit être comprise entre : " + valeurMin + " et " + valeurMax);
                 }
             }
         });
@@ -208,8 +205,8 @@ public class SimulationInterface {
         } finally {
             if (this.envoieThread != null && this.envoieThread.isRunning())
                 this.envoieThread.setRunning(false);
-            this.fenetreGestionEnvoie.setVisible(false);
-            this.fenetreGestionEnvoie.getEnvoie().setText("Envoie des donnees");
+            this.fenetreGestionEnvoi.setVisible(false);
+            this.fenetreGestionEnvoi.getEnvoi().setText("Envoie des donnees");
             this.fenetreConnexionIP.setVisible(true);
         }
     }

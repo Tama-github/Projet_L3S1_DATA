@@ -111,7 +111,7 @@ public class Parseur {
      *
      *  @return ArrayList<String> : Le tableau qui contiens tous les etages concerné
      */
-    public static ArrayList<String> getEtagesForBatoment (String nomFichier, String batiment) {
+    public static ArrayList<String> getEtagesForBatiment(String nomFichier, String batiment) {
         ArrayList<String> res = new ArrayList<>();
         char c;
         String s = "";
@@ -152,7 +152,7 @@ public class Parseur {
      *
      *  @return ArrayList<String> : Le tableau qui contiens toutes les salles concerné
      */
-    public static ArrayList<String> getSallesForEtageAndBatoment (String nomFichier, String batiment, String etage) {
+    public static ArrayList<String> getSallesForEtageAndBatiment(String nomFichier, String batiment, String etage) {
         ArrayList<String> res = new ArrayList<>();
         char c;
         String s = "";

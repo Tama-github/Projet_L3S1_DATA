@@ -7,7 +7,7 @@ import java.io.IOException;
  * Thread qui gère l'envoie des donnée au serveur
  * @autor Ludovic BURG
  */
-public class EnvoieThread extends Thread implements Runnable {
+public class EnvoiThread extends Thread implements Runnable {
     private ServicesReseau servicesReseau;
     private int temps;
     private boolean alea;
@@ -16,7 +16,7 @@ public class EnvoieThread extends Thread implements Runnable {
     private int max;
     private boolean running = true;
 
-    public EnvoieThread(ServicesReseau servicesReseau, int temps, boolean alea, int data, int min, int max) {
+    public EnvoiThread(ServicesReseau servicesReseau, int temps, boolean alea, int data, int min, int max) {
         this.servicesReseau = servicesReseau;
         this.temps = temps;
         this.alea = alea;

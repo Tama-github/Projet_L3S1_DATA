@@ -82,7 +82,7 @@ public class ParametresCapteur extends JFrame {
         salle.setEnabled(false);
         posRelative.setEditable(false);
 
-        this.setTitle("Parametres Capteurs");
+        this.setTitle("Paramètres Capteurs");
         this.setSize(400, 350);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);

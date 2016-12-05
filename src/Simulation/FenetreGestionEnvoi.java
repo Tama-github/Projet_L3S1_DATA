@@ -1,26 +1,26 @@
 package Simulation;
 
-import org.w3c.dom.html.HTMLOptGroupElement;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 /**
  * Created by msi on 28/11/2016.
  */
-public class FenetreGestionEnvoie extends JFrame {
+public class FenetreGestionEnvoi extends JFrame {
     private boolean isAlea = true;
     private JSpinner valeur;
-    private JSpinner frequanceEnvoie;
-    private JButton envoie;
+    private JSpinner frequenceEnvoi;
+    private JButton envoi;
     private JButton deconnexion;
     private JLabel erreurText;
 
-    public FenetreGestionEnvoie () {
-        super("Gestion d'envoie");
+    public FenetreGestionEnvoi() {
+        super("Gestion d'envoi");
+
+        ImageIcon icone = new ImageIcon("icon.png");
+        this.setIconImage(icone.getImage());
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(300, 300);
@@ -43,8 +43,8 @@ public class FenetreGestionEnvoie extends JFrame {
 
         /* Boutons radios */
         ButtonGroup typeGeneration = new ButtonGroup();
-        JRadioButton alea = new JRadioButton("Generation aleatoire");
-        JRadioButton fixe = new JRadioButton("Generation d'une valeur fixe");
+        JRadioButton alea = new JRadioButton("Génération aléatoire");
+        JRadioButton fixe = new JRadioButton("Génération d'une valeur fixe");
         typeGeneration.add(alea);
         typeGeneration.add(fixe);
         mainContainer.add(alea);
@@ -75,19 +75,19 @@ public class FenetreGestionEnvoie extends JFrame {
 
         mainContainer.add(subContainerFixe);
 
-        /* Frequence d'envoie */
-        JLabel freq = new JLabel("Frequence d'envoie (ms)");
-        this.frequanceEnvoie = new JSpinner();
+        /* Frequence d'envoi */
+        JLabel freq = new JLabel("Fréquence d'envoi (ms)");
+        this.frequenceEnvoi = new JSpinner();
         subContainerFreq.add(freq);
-        subContainerFreq.add(this.frequanceEnvoie);
+        subContainerFreq.add(this.frequenceEnvoi);
 
         mainContainer.add(subContainerFreq);
 
 
         /* Boutons de controlle */
-        this.envoie = new JButton("Envoie des donnees");
-        this.deconnexion = new JButton("Deconnexion du capteur");
-        subContainerButton.add(this.envoie);
+        this.envoi = new JButton("Envoi des données");
+        this.deconnexion = new JButton("Déconnexion du capteur");
+        subContainerButton.add(this.envoi);
         subContainerButton.add(this.deconnexion);
 
 
@@ -114,12 +114,12 @@ public class FenetreGestionEnvoie extends JFrame {
         return valeur;
     }
 
-    public JSpinner getFrequanceEnvoie() {
-        return frequanceEnvoie;
+    public JSpinner getFrequenceEnvoi() {
+        return frequenceEnvoi;
     }
 
-    public JButton getEnvoie() {
-        return envoie;
+    public JButton getEnvoi() {
+        return envoi;
     }
 
     public JButton getDeconnexion() {
