@@ -11,8 +11,8 @@ batiment(etage())
 Les points virgules dans le fichier ne sont pas facultatifs, et ils ne doivent apparaitre qu'autour des données a traiter exactement a ces place soit un avant la première lettre du premeir batiment et un sur la dernière ligne.
 
 *******************/
-;Batiment Administratif(3e etage(305))
-U3(2e etage(217.201.208)3e etage(305.306.308.307)1er etage(101.102.103)rdc(01.01bis))
-U1(1er etage(101.108.109))
+;Batiment Administratif(3e(305))
+U3(2e(217.201.208)3e(305.306.308.307)1er(101.102.103)RDC(01.01bis))
+U1(1er(101.108.109))
 ;
 

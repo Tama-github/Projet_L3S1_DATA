@@ -2,7 +2,7 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/Simulation/EnvoieThread.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/Simulation/FenetreGestionEnvoie.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/Simulation/FenetreGestionEnvoi.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/Simulation/Localisation.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/Simulation/LocalisationExterieur.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/Simulation/LocalisationInterieur.java" charset="UTF-8" />

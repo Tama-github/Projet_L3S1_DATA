@@ -31,6 +31,9 @@ public class ParametresCapteur extends JFrame {
     public ParametresCapteur() {
         super("Paramètres Capteurs");
 
+        ImageIcon icone = new ImageIcon("icon.png");
+        this.setIconImage(icone.getImage());
+
         JPanel pLocalisation = new JPanel();
         JPanel spLoc = new JPanel();
         JPanel spBatiment = new JPanel();
@@ -58,6 +61,7 @@ public class ParametresCapteur extends JFrame {
 
         JRadioButton interieur = new JRadioButton("Intérieur ");
         JRadioButton exterieur = new JRadioButton("Extérieur ");
+
 
         batiment.addItem("Sélection");
         etage.addItem("Sélection");
@@ -185,7 +189,7 @@ public class ParametresCapteur extends JFrame {
             public void actionPerformed(ActionEvent eventBatiment) {
                 int i;
                 ArrayList<String> listeEtage;
-                listeEtage = Parseur.getEtagesForBatoment("position_capteur.txt", batiment.getSelectedItem().toString());
+                listeEtage = Parseur.getEtagesForBatiment("position_capteur.txt", batiment.getSelectedItem().toString());
                 etage.removeAllItems();
                 for (i = 0; i < listeEtage.size(); i++) {
                     etage.addItem(listeEtage.get(i));
@@ -199,7 +203,7 @@ public class ParametresCapteur extends JFrame {
                 int i;
                 if (etage.getSelectedItem() != null) {
                     ArrayList<String> listeSalle;
-                    listeSalle = Parseur.getSallesForEtageAndBatoment("position_capteur.txt", batiment.getSelectedItem().toString(), etage.getSelectedItem().toString());
+                    listeSalle = Parseur.getSallesForEtageAndBatiment("position_capteur.txt", batiment.getSelectedItem().toString(), etage.getSelectedItem().toString());
                     salle.removeAllItems();
                     for (i = 0; i < listeSalle.size(); i++) {
                         salle.addItem(listeSalle.get(i));

@@ -38,6 +38,8 @@ public class FenetreConnexionIP extends JFrame {
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 
+		ImageIcon icone = new ImageIcon("icon.png");
+		this.setIconImage(icone.getImage());
 
 		Font police = new Font("Arial", Font.BOLD, 12);
 		jtfIP.setFont(police);
