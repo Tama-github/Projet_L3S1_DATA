@@ -54,7 +54,7 @@ public class SimulationInterface {
                     parametresCapteur.getErreur().setText("");
                     parametresCapteur.setSize(400, 350);
                     id = parametresCapteur.getIdCapteur().getText();
-                    type = parametresCapteur.getType().toString();
+                    type = parametresCapteur.getTypeDonnees().getSelectedItem().toString();
                     valeurMin = Integer.parseInt(parametresCapteur.getMin().getText());
                     valeurMax = Integer.parseInt(parametresCapteur.getMax().getText());
 

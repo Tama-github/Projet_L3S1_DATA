@@ -1,5 +1,7 @@
 package Simulation;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -13,7 +15,7 @@ public class ParametresCapteur extends JFrame {
 
 
     private JFormattedTextField idCapteur = new JFormattedTextField();
-    private JFormattedTextField typeDonnees = new JFormattedTextField();
+    private JComboBox typeDonnees = new JComboBox();
     private JTextField latitude = new JTextField();
     private JTextField longitude = new JTextField();
     private JComboBox batiment = new JComboBox();
@@ -27,12 +29,28 @@ public class ParametresCapteur extends JFrame {
     private boolean isExterieur = false;
     private boolean isInterieur = false;
     private JLabel erreur = new JLabel();
+    private ArrayList<String> typeExterieur = new ArrayList<>();
+    private ArrayList<String> typeInterieur = new ArrayList<>();
 
     public ParametresCapteur() {
         super("Paramètres Capteurs");
 
         ImageIcon icone = new ImageIcon("icon.png");
         this.setIconImage(icone.getImage());
+
+        typeInterieur.add("Température");
+        typeInterieur.add("Humidité");
+        typeInterieur.add("Luminosité");
+        typeInterieur.add("Volume Sonore");
+        typeInterieur.add("Consomation éclairage");
+        typeInterieur.add("Eau froide");
+        typeInterieur.add("Eau Chaude");
+
+        typeExterieur.add("Température");
+        typeExterieur.add("Humidité");
+        typeExterieur.add("Luminosité");
+        typeExterieur.add("Vitesse vent");
+        typeExterieur.add("Pression atmosphérique");
 
         JPanel pLocalisation = new JPanel();
         JPanel spLoc = new JPanel();
@@ -52,7 +70,7 @@ public class ParametresCapteur extends JFrame {
         JPanel pIdCapteur = new JPanel();
         JLabel lidCapteur = new JLabel("Identifiant du capteur");
         JPanel pTypeDonnees = new JPanel();
-        JLabel lTypedonnees = new JLabel("Type de donnée          ");
+        JLabel lTypedonnees = new JLabel("Type de donnée");
         JPanel pInterval = new JPanel();
         JLabel lInter1 = new JLabel("Intervalle de ");
         JLabel lInter2 = new JLabel(" à ");
@@ -92,7 +110,7 @@ public class ParametresCapteur extends JFrame {
         pIdCapteur.add(lidCapteur);
         pIdCapteur.add(idCapteur);
 
-        typeDonnees.setColumns(20);
+        typeDonnees.addItem("Sélection");
         pTypeDonnees.add(lTypedonnees);
         pTypeDonnees.add(typeDonnees);
 
@@ -144,10 +162,9 @@ public class ParametresCapteur extends JFrame {
 
         spValider.add(pValider);
         pValider.add(valider);
-
         princParam.add(pIdCapteur);
-        princParam.add(pTypeDonnees);
         princParam.add(pLocalisation);
+        princParam.add(pTypeDonnees);
         princParam.add(pInterval);
         princParam.add(spValider);
         princParam.add(erreur);
@@ -157,6 +174,7 @@ public class ParametresCapteur extends JFrame {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 super.mouseClicked(mouseEvent);
+                int i;
                 isInterieur = true;
                 isExterieur = false;
                 latitude.setEditable(false);
@@ -165,6 +183,10 @@ public class ParametresCapteur extends JFrame {
                 etage.setEnabled(true);
                 salle.setEnabled(true);
                 posRelative.setEditable(true);
+                typeDonnees.removeAllItems();
+                for (i = 0; i < typeInterieur.size(); i++) {
+                    typeDonnees.addItem(typeInterieur.get(i));
+                }
             }
         });
 
@@ -172,6 +194,7 @@ public class ParametresCapteur extends JFrame {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 super.mouseClicked(mouseEvent);
+                int i;
                 isExterieur = true;
                 isInterieur = false;
                 latitude.setEditable(true);
@@ -180,6 +203,10 @@ public class ParametresCapteur extends JFrame {
                 etage.setEnabled(false);
                 salle.setEnabled(false);
                 posRelative.setEditable(false);
+                typeDonnees.removeAllItems();
+                for (i = 0; i < typeExterieur.size(); i++) {
+                    typeDonnees.addItem(typeExterieur.get(i));
+                }
             }
         });
 
@@ -223,7 +250,7 @@ public class ParametresCapteur extends JFrame {
         return idCapteur;
     }
 
-    public JFormattedTextField getTypeDonnees() {
+    public JComboBox getTypeDonnees() {
         return typeDonnees;
     }
 
@@ -374,11 +401,11 @@ public class ParametresCapteur extends JFrame {
         }
         if (isExterieur)
         {
-            return (this.checkIntervalle() && this.checkChampTexte(idCapteur) && this.checkChampTexte(typeDonnees) && this.checkComboBox());
+            return (this.checkIntervalle() && this.checkChampTexte(idCapteur) && this.checkComboBox());
         }
         else
         {
-            return (this.checkIntervalle() && this.checkChampTexte(idCapteur) && this.checkChampTexte(typeDonnees) && this.checkChampTexte(posRelative) && this.checkComboBox());
+            return (this.checkIntervalle() && this.checkChampTexte(idCapteur) && this.checkChampTexte(posRelative) && this.checkComboBox());
         }
     }
 }
