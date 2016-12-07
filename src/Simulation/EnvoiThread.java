@@ -4,7 +4,7 @@ package Simulation;
 import java.io.IOException;
 
 /**
- * Thread qui gère l'envoie des donnée au serveur
+ * Thread qui gère l'envoi des données au serveur
  * @autor Ludovic BURG
  */
 public class EnvoiThread extends Thread implements Runnable {
@@ -29,7 +29,7 @@ public class EnvoiThread extends Thread implements Runnable {
     public void run() {
         try {
             while (this.running) {
-                servicesReseau.envoyer(this.getStringPourEnvoie());
+                servicesReseau.envoyer(this.getStringPourEnvoi());
                 Thread.sleep(this.temps);
             }
             Thread.currentThread().interrupt();
@@ -46,7 +46,7 @@ public class EnvoiThread extends Thread implements Runnable {
      * @return String : si on est connecte, on retourne le prochain message du socket, si non on retourne "pas connecte"
      * @throws IOException
      */
-    public String getStringPourEnvoie () throws IOException {
+    public String getStringPourEnvoi() throws IOException {
         if (this.alea) {
             return "ValeurCapteur;" + (Math.random()*(this.max-this.min) + this.min) + "\n";
         } else {

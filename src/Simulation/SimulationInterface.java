@@ -21,8 +21,8 @@ public class SimulationInterface {
     private ServicesReseau servicesReseau;
     private String ip;
     private int port;
-    private int valeurEnvoie;
-    private EnvoiThread envoieThread = null;
+    private int valeurEnvoi;
+    private EnvoiThread envoiThread = null;
 
     /* Fenetres de l'application */
     private ParametresCapteur parametresCapteur;
@@ -41,7 +41,7 @@ public class SimulationInterface {
         this.fenetreConnexionIP = new FenetreConnexionIP();
         this.fenetreConnexionIP.setVisible(false);
 
-        /* creation de la fenetre de gestion d'envoie */
+        /* creation de la fenetre de gestion d'envoi */
         this.fenetreGestionEnvoi = new FenetreGestionEnvoi();
         this.fenetreGestionEnvoi.setVisible(false);
 
@@ -77,6 +77,7 @@ public class SimulationInterface {
                     }
                     parametresCapteur.setVisible(false);
                     fenetreConnexionIP.setVisible(true);
+                    fenetreConnexionIP.setFocusable(true);
 
                 }
             }
@@ -89,6 +90,7 @@ public class SimulationInterface {
                 super.mouseClicked(e);
                 fenetreConnexionIP.setVisible(false);
                 parametresCapteur.setVisible(true);
+                parametresCapteur.setFocusable(true);
             }
         });
 
@@ -107,6 +109,7 @@ public class SimulationInterface {
                         } else {
                             fenetreConnexionIP.setVisible(false);
                             fenetreGestionEnvoi.setVisible(true);
+                            fenetreGestionEnvoi.setFocusable(true);
                         }
                     } catch (IOException e1) {
                         fenetreConnexionIP.printErr("Erreur lors de la connexion au serveur");
@@ -117,7 +120,7 @@ public class SimulationInterface {
             }
         });
 
-        /* Gestion des evenements de la fenetre d'envoie de donnees */
+        /* Gestion des evenements de la fenetre d'envoi de donnees */
         this.fenetreGestionEnvoi.getDeconnexion().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -130,19 +133,19 @@ public class SimulationInterface {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if (envoieThread != null)
-                    envoieThread.interrupt();
+                if (envoiThread != null)
+                    envoiThread.interrupt();
                 if (((int) fenetreGestionEnvoi.getFrequenceEnvoi().getValue() > 0) &&
                         (fenetreGestionEnvoi.isAlea() || (((int) fenetreGestionEnvoi.getValeur().getValue() >= valeurMin) && (int) fenetreGestionEnvoi.getValeur().getValue() <= valeurMax)))
                 {
-                    envoieThread = new EnvoiThread(servicesReseau,
+                    envoiThread = new EnvoiThread(servicesReseau,
                             (int) fenetreGestionEnvoi.getFrequenceEnvoi().getValue(),
                             fenetreGestionEnvoi.isAlea(),
                             (int) fenetreGestionEnvoi.getValeur().getValue(),
                             valeurMin,
                             valeurMax);
 
-                    envoieThread.start();
+                    envoiThread.start();
                     fenetreGestionEnvoi.getEnvoi().setText("Rafraichir");
                     fenetreGestionEnvoi.getErreurText().setText("");
                 } else {
@@ -195,7 +198,7 @@ public class SimulationInterface {
     }
 
     /**
-     * fonction de deconnection (gestion du thread d'envoie)
+     * fonction de deconnection (gestion du thread d'envoi)
      */
     public void callbackDeconnexion () {
         try {
@@ -203,11 +206,12 @@ public class SimulationInterface {
         } catch (IOException e) {
             /*ne rien faire*/
         } finally {
-            if (this.envoieThread != null && this.envoieThread.isRunning())
-                this.envoieThread.setRunning(false);
+            if (this.envoiThread != null && this.envoiThread.isRunning())
+                this.envoiThread.setRunning(false);
             this.fenetreGestionEnvoi.setVisible(false);
-            this.fenetreGestionEnvoi.getEnvoi().setText("Envoie des donnees");
+            this.fenetreGestionEnvoi.getEnvoi().setText("Envoi des données");
             this.fenetreConnexionIP.setVisible(true);
+            this.fenetreConnexionIP.setFocusable(true);
         }
     }
 

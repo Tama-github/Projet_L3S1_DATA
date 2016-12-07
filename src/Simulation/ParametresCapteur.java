@@ -184,18 +184,18 @@ public class ParametresCapteur extends JFrame {
         });
 
 
-        batiment.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent eventBatiment) {
-                int i;
-                ArrayList<String> listeEtage;
-                listeEtage = Parseur.getEtagesForBatiment("position_capteur.txt", batiment.getSelectedItem().toString());
-                etage.removeAllItems();
-                for (i = 0; i < listeEtage.size(); i++) {
-                    etage.addItem(listeEtage.get(i));
-                }
-            }
-        });
+                batiment.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent eventBatiment) {
+                        int i;
+                        ArrayList<String> listeEtage;
+                        listeEtage = Parseur.getEtagesForBatiment("position_capteur.txt", batiment.getSelectedItem().toString());
+                        etage.removeAllItems();
+                        for (i = 0; i < listeEtage.size(); i++) {
+                            etage.addItem(listeEtage.get(i));
+                        }
+                    }
+                });
 
         etage.addActionListener(new ActionListener() {
             @Override
@@ -215,7 +215,7 @@ public class ParametresCapteur extends JFrame {
         this.setContentPane(princParam);
 
         this.setVisible(true);
-
+        this.setFocusable(true);
     }
 
 
@@ -340,11 +340,11 @@ public class ParametresCapteur extends JFrame {
         if (isExterieur) {
             if (latitude.getText().equals("") || longitude.getText().equals(""))
             {
-                printErr("Erreur : La latitude comprise entre 0° et 90° !");
+                printErr("Erreur : La latitude comprise entre -90° et 90° !");
                 return false;
             }
-            if (Double.parseDouble(latitude.getText()) < 0 || Double.parseDouble(latitude.getText()) > 90) {
-                printErr("Erreur : La latitude comprise entre 0° et 90° !");
+            if (Double.parseDouble(latitude.getText()) < -90 || Double.parseDouble(latitude.getText()) > 90) {
+                printErr("Erreur : La latitude comprise entre -90° et 90° !");
                 return false;
             }
             if (Double.parseDouble(longitude.getText()) < -180 || Double.parseDouble(longitude.getText()) > 180) {

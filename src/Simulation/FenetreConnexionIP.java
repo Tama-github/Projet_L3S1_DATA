@@ -78,7 +78,7 @@ public class FenetreConnexionIP extends JFrame {
 	/**
 	 *  Champs d'dresse IP
 	 *
-	 *  @return JTextField : Renvoie le champs de texte contenant l'adresse IP de connexion
+	 *  @return JTextField : Renvoi le champs de texte contenant l'adresse IP de connexion
 	 */
 	public JTextField getJtfIP() {
 		return this.jtfIP;
@@ -88,7 +88,7 @@ public class FenetreConnexionIP extends JFrame {
 	/**
 	 *  Champs du port
 	 *
-	 *  @return JSpinner : Renvoie le champs de texte contenant le port de connexion
+	 *  @return JSpinner : Renvoi le champs de texte contenant le port de connexion
 	 */
 	public JSpinner getJtfPORT() {
 		return this.jtfPORT;
@@ -98,7 +98,7 @@ public class FenetreConnexionIP extends JFrame {
 	/**
 	 *  Bouton "Connexion"
 	 *
-	 *  @return JButton : Renvoie le bouton de connexion
+	 *  @return JButton : Renvoi le bouton de connexion
 	 */
 	public JButton getButtonConnection() {
 		return this.buttonConnection;
@@ -108,7 +108,7 @@ public class FenetreConnexionIP extends JFrame {
 	/**
 	 *  Bouton "Annuler"
 	 *
-	 *  @return JButton : Renvoie le bouton d'annulation
+	 *  @return JButton : Renvoi le bouton d'annulation
 	 */
 	public JButton getButtonCancel() {
 		return this.buttonCancel;
@@ -120,7 +120,7 @@ public class FenetreConnexionIP extends JFrame {
 	 *
 	 *  @param ip String : L'adresse IP à tester
 	 *
-	 *  @return boolean : Renvoie true si l'adresse IP est conforme
+	 *  @return boolean : Renvoi true si l'adresse IP est conforme
 	 */
 	public boolean verifIP (String ip) {
 		return ipPattern.matcher(ip).find();

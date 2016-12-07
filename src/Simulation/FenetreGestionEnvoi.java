@@ -41,7 +41,7 @@ public class FenetreGestionEnvoi extends JFrame {
         JPanel subContainerFreq = new JPanel();
         subContainerFreq.setLayout(grid4);
 
-        /* Boutons radios */
+        /* Boutons radio */
         ButtonGroup typeGeneration = new ButtonGroup();
         JRadioButton alea = new JRadioButton("Génération aléatoire");
         JRadioButton fixe = new JRadioButton("Génération d'une valeur fixe");
@@ -84,7 +84,7 @@ public class FenetreGestionEnvoi extends JFrame {
         mainContainer.add(subContainerFreq);
 
 
-        /* Boutons de controlle */
+        /* Boutons de controle */
         this.envoi = new JButton("Envoi des données");
         this.deconnexion = new JButton("Déconnexion du capteur");
         subContainerButton.add(this.envoi);
